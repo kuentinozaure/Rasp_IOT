@@ -1,25 +1,74 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Meteo from './Meteo'
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.showWeather = this.showWeather.bind(this);
+    this.showAccueil = this.showAccueil.bind(this);
+
+    this.state = {
+      weather : false,
+      accueil : true,
+    }
+  }
+
+  showWeather(){
+    this.setState({
+      weather : true,
+      accueil : false,
+    });
+  }
+
+  showAccueil(){
+    this.setState({
+      accueil : true,
+      weather : false,
+    });
+  }
+
+  renderTab(){
+    if(this.state.accueil == true){
+      return(<div>dfdfd</div>);
+    }else if(this.state.weather == true){
+      return(<Meteo></Meteo>);
+    }
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+        <nav className="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mr-auto">
+            <li className="nav-item active">
+                <a className="nav-link" onClick={this.showAccueil}>
+                  <i className="fa fa-home"></i>
+                  Accueil
+                  <span className="sr-only">(current)</span>
+                  </a>
+              </li>
+              <li className="nav-item active">
+                <a className="nav-link" onClick={this.showWeather}>
+                  <i className="fa fa-home"></i>
+                  METEO
+                  <span className="sr-only">(current)</span>
+                  </a>
+              </li>
+              <li className="nav-item active">
+                <a className="nav-link" href="#">
+                  <i className="fa fa-home"></i>
+                  ////
+                  <span className="sr-only">(current)</span>
+                  </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
         </header>
+        {this.renderTab()}
       </div>
     );
   }

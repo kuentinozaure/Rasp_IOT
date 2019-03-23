@@ -9,27 +9,21 @@ class MeteoCard extends Component{
 
     render(){
         return(
-        <div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-4 mt-5">
-                        <div class="card text-center">
-                        {this.props.location} {this.props.region} {this.props.country}
-                        <img class="card-img-top" src={this.props.image} width="200" height="200"/>
-                            <div class="card-body" id="card">
-                                Il fait     : {this.props.type}<br></br>
-                                Temperature : {this.props.temp}°C<br></br>
-                                Humidité    : {this.props.humidity}<br></br>
-                                Le vent est a   : {this.props.vent}km/h<br></br>
-                            </div>
-                            <div class="card-footer">
-                                {this.props.time}
-                            </div>
-                        </div>
+            <div className="col-md-4 ">
+                <div className="card text-center">
+                    {this.props.location} {this.props.region} {this.props.country}
+                    <img className="card-img-top" src={this.props.image} width="200" height="200"/>
+                    <div className="card-body" id="card">
+                        Il fait     : {this.props.type}<br></br>
+                        Temperature : {this.props.temp}°C<br></br>
+                        Humidité    : {this.props.humidity}<br></br>
+                        Le vent est a   : {this.props.vent}km/h<br></br>
+                    </div>
+                    <div className="card-footer">
+                        {this.props.time}
                     </div>
                 </div>
             </div>
-        </div>
         );
     }
 }

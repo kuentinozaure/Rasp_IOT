@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import MeteoCard from './MeteoCard';
+import MeteoPrevision from './MeteoPrevision'
 
 class Meteo extends Component{
 
@@ -17,17 +18,33 @@ class Meteo extends Component{
             .then(response=>{
                 let tab = [];
                 tab.push(
-                    <MeteoCard 
+                        <MeteoCard 
+                            location = {response.data.location.name}
+                            region   = {response.data.location.region}
+                            country  = {response.data.location.country}
+                            time     = {response.data.location.localtime}
+                            temp     = {response.data.current.temp_c}
+                            type     = {response.data.current.condition.text}
+                            vent     = {response.data.current.wind_kph}
+                            image    = {response.data.current.condition.icon}
+                            humidity = {response.data.current.humidity}
+                        ></MeteoCard>
+                )
+                tab.push(<div class="col-md-2 "></div>)
+                tab.push(
+                    <MeteoPrevision
                         location = {response.data.location.name}
                         region   = {response.data.location.region}
                         country  = {response.data.location.country}
-                        time     = {response.data.location.localtime}
-                        temp     = {response.data.current.temp_c}
-                        type     = {response.data.current.condition.text}
-                        vent     = {response.data.current.wind_kph}
-                        image    = {response.data.current.condition.icon}
-                        humidity = {response.data.current.humidity}
-                    ></MeteoCard>
+                        nextDay  = {response.data.forecast.forecastday[0].date}
+                        maxTemp  = {response.data.forecast.forecastday[0].day.maxtemp_c}
+                        minTemp  = {response.data.forecast.forecastday[0].day.mintemp_c}
+                        avgTemp  = {response.data.forecast.forecastday[0].day.avgtemp_c}
+                        maxvent  = {response.data.forecast.forecastday[0].day.maxwind_kph}
+                        avghumifity = {response.data.forecast.forecastday[0].day.avghumidity}
+                        img      = {response.data.forecast.forecastday[0].day.condition.icon}
+                        type     = {response.data.forecast.forecastday[0].day.condition.text}
+                    ></MeteoPrevision>
                 )
                 this.setState({
                     tab: tab,
@@ -37,7 +54,12 @@ class Meteo extends Component{
     render(){
         return(
             <div>
-                {this.state.tab}
+                <br></br>
+                <div class="row">
+                    <div class="col-md-1 "></div>
+                    {this.state.tab}
+                    <div class="col-md-1 "></div>
+                </div>
             </div>
         );
     }
